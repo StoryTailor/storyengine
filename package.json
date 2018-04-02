@@ -1,0 +1,35 @@
+{
+  "name": "story-engine",
+  "version": "0.0.1",
+  "description": "A node based engine to create non-linear stories",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/StoryTailor/storyengine.git"
+  },
+  "keywords": [
+    "story",
+    "node",
+    "js",
+    "mongodb",
+    "creative"
+  ],
+  "author": "Nythe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/StoryTailor/storyengine/issues"
+  },
+  "homepage": "https://github.com/StoryTailor/storyengine#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "mongoose": "^5.0.12",
+    "path": "^0.12.7"
+  }
+}
