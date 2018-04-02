@@ -1,10 +1,10 @@
 {
   "name": "story-engine",
   "version": "0.0.1",
-  "description": "A node based engine to create non-linear stories",
+  "description": "A Node.js based engine to create non-linear stories",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "engine": "node index.js"
   },
   "repository": {
     "type": "git",
