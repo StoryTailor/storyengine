@@ -1,8 +1,6 @@
 const path = require("path");
-const express = require(path.join(__dirname, "core/express.js"));
-const http = require("http");
-const server = http.createServer(express);
-const port = 27000;
+const App = require(path.join(__dirname, "src/core/express.js"));
+const config = require(path.join(__dirname, "config/global.json"));
 
-server.listen(port);
-console.log(`Running on port ${port}`);
+App.runServer(config);
+console.log(`Running on port ${config.port}`);
