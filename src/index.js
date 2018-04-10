@@ -1,40 +1,43 @@
 const path = require("path");
 const config = require(path.join(__dirname, "../config/index.js"));
-const RouteParser = require("./core/utils/RouteParser.js");
 const Express = require("./core/Express.js");
-
+/**
+ * @module  App
+ * Class which creates and starts the express app
+ */
 class App {
+    /**
+     * Instanciates the express app
+     * @method  constructor
+     * @return {void}
+     */
     constructor(){
         this.express = new Express(config);
-        this.routeParser = new RouteParser(this.express);
     }
 
+    /**
+     * @method  startEngine
+     * Starts the express server and returns
+     * a promise resolving the app
+     * @return {Promise}
+     */
     startEngine() {
         let scope = this;
         let config = scope.express.config;
 
-        scope.applyRoutes(config.routes);
-        scope.express.runServer();
-    }
+        return new Promise((resolve, reject) => {
+            try {
+                scope.express.runServer()
+                .then((engine) => {
+                    resolve(engine);
+                });
+            }
+            catch(error){
+                reject(error);
+                throw new Error(error);
+            }
+        })
 
-    applyRoutes(routes = []) {
-        let scope = this;
-        let app = scope.express.app;
-
-        // base route
-        app.get("/", (req, res) => {
-            res.json({
-                data: {
-                    title: "Story Engine",
-                    description: "A Node.js based engine to create non-linear stories",
-                    author: "Nythe",
-                    license: "MIT",
-                    readme: "https://github.com/StoryTailor/storyengine#readme"
-                }
-            });
-        });
-
-        scope.routeParser.proceed();
     }
 }
 
