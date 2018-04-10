@@ -1,18 +1,57 @@
+const express = require("express");
+
+/**
+ * @module  RouteParser
+ * Add the routes to the express app
+ */
 class RouteParser {
-	constructor(app) {
-		this.app = app;
-	}
+    /**
+     * @method constructor
+     * @return {void}
+     */
+    constructor() {}
 
-	proceed() {
-		let scope = this;
-		let config = scope.app.config;
-		let routes = config.routes;
+    /**
+     * @method  proceed
+     * Parse all the routes and add them to the
+     * express app
+     * @param  {Object} app     Express app
+     * @param  {Array} routes   Routes
+     * @return {Promise}
+     */
+    proceed(app, routes) {
+        let scope = this;
+        let configRoutes = routes;
 
-		routes.forEach((route) => {
-			let action = route.action;
-			scope.app.use(route.url, action);
-		});
-	}
+        return new Promise((resolve, reject) => {
+            try {
+                // base route
+                app.get("/", (req, res) => {
+                    res.json({
+                        data: {
+                            title: "Story Engine",
+                            description: "A Node.js based engine to create non-linear stories",
+                            author: "Nythe",
+                            license: "MIT",
+                            readme: "https://github.com/StoryTailor/storyengine#readme"
+                        }
+                    });
+                });
+
+                // TODO
+                configRoutes.forEach((route) => {
+                    let action = route.action;
+                    app.use(route.url, action);
+                });
+
+                resolve(app);
+            }
+            catch(error) {
+                reject(error);
+                throw new Error(error);
+            }
+        })
+    }
 }
 
-module.exports = RouteParser;
+module.exports = new RouteParser();
