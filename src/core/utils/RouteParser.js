@@ -12,9 +12,10 @@ class RouteParser {
     constructor() {}
 
     /**
-     * @method  proceed
      * Parse all the routes and add them to the
      * express app
+     * 
+     * @method  proceed
      * @param  {Object} app     Express app
      * @param  {Array} routes   Routes
      * @return {Promise}

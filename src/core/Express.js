@@ -25,6 +25,7 @@ class Express extends EventEmitter {
     /**
      * Initiates the express app and its base
      * middlewares
+     * 
      * @method  initApp
      * @return {Promise}
      */
@@ -55,6 +56,7 @@ class Express extends EventEmitter {
 
     /**
      * Add the routes via RouteParser and starts the server
+     * 
      * @method  runServer
      * @return {Promise}
      */
