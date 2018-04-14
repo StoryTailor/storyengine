@@ -1,0 +1,22 @@
+{
+    "get": {
+        "method": "GET",
+        "url": "/stories"
+    },
+    "getById": {
+        "method": "GET",
+        "url": "/stories/:id"
+    },
+    "post": {
+        "method": "POST",
+        "url": "/stories"
+    },
+    "put": {
+        "method": "PUT",
+        "url": "/stories/:id"
+    },
+    "delete": {
+        "method": "DELETE",
+        "url": "/stories/:id"
+    }
+}
