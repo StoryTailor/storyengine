@@ -1,5 +1,5 @@
 const path = require("path");
-const config = require(path.join(__dirname, "../config/index.js"));
+const config = require(path.join(__dirname, "../config"));
 const Express = require("./core/Express.js");
 const Mongo = require("./core/Mongo.js");
 /**
@@ -11,11 +11,13 @@ class App {
      * Instanciates the express app
      * 
      * @method  constructor
+     * @param {Object} bundles App bundles
      * @return {void}
      */
-    constructor(){
+    constructor(bundles){
         this.express = new Express(config);
         this.mongoClient = new Mongo(config.mongo);
+        this.bundles = bundles;
     }
 
     /**
@@ -33,7 +35,7 @@ class App {
             try {
                 scope.mongoClient.connect()
                 .then(() => {
-                    return scope.express.runServer(); 
+                    return scope.express.runServer(scope.bundles); 
                 })
                 .then((engine) => {
                     resolve(engine);

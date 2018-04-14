@@ -20,9 +20,8 @@ class RouteParser {
      * @param  {Array} routes   Routes
      * @return {Promise}
      */
-    proceed(app, routes) {
+    proceed(app, bundles) {
         let scope = this;
-        let configRoutes = routes;
 
         return new Promise((resolve, reject) => {
             try {
@@ -40,10 +39,10 @@ class RouteParser {
                 });
 
                 // TODO
-                configRoutes.forEach((route) => {
-                    let action = route.action;
-                    app.use(route.url, action);
-                });
+                // configRoutes.forEach((route) => {
+                //     let action = route.action;
+                //     app.use(route.url, action);
+                // });
 
                 resolve(app);
             }
@@ -51,7 +50,7 @@ class RouteParser {
                 reject(error);
                 throw new Error(error);
             }
-        })
+        });
     }
 }
 

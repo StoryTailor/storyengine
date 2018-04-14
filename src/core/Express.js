@@ -58,16 +58,18 @@ class Express extends EventEmitter {
      * Add the routes via RouteParser and starts the server
      * 
      * @method  runServer
+     * @param {Object} bundles App bundles
      * @return {Promise}
      */
-    runServer() {
+    runServer(bundles) {
         let scope = this;
         let config = scope.config;
+        let appBundles = bundles;
 
         return new Promise((resolve, reject) => {
             scope.initApp()
             .then((app) => {
-                return scope.routeParser.proceed(app, config.routes);
+                return scope.routeParser.proceed(app, appBundles);
             })
             .then((app) => {
                 app.listen(config.global.port, () => console.log(`Running on port ${config.global.port}`));
