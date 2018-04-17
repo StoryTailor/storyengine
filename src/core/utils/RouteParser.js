@@ -39,10 +39,18 @@ class RouteParser {
                 });
 
                 // TODO
-                // configRoutes.forEach((route) => {
-                //     let action = route.action;
-                //     app.use(route.url, action);
-                // });
+                for(let i in bundles) {
+                    let controller = bundles[i].controller,
+                        routes = bundles[i].config.routes;
+
+                    for(let r in routes) {
+                        if(typeof controller[r] !== "undefined") {
+                            app.use(routes[r].url, (req, res) => {
+                                controller[r](req, res);
+                            });
+                        }
+                    }
+                }
 
                 resolve(app);
             }

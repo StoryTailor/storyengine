@@ -5,7 +5,7 @@ class AbstractService {
 
     get(filters) {
         let scope = this;
-        filters = filers || {};
+        filters = filters || {};
 
         return scope.model.find(filters);
     }
