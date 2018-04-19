@@ -69,11 +69,7 @@ class Express extends EventEmitter {
         return new Promise((resolve, reject) => {
             scope.initApp()
             .then((app) => {
-                for(let i in bundles){
-                    let controller = bundles[i].controller,
-                        service = bundles[i].service;
-                }
-
+                // Initiate the routes
                 return scope.routeParser.proceed(app, appBundles);
             })
             .then((app) => {

@@ -23,6 +23,12 @@ class App {
         this.bundles = bundles;
     }
 
+    /**
+     * Browse all the bundles and create the matching
+     * services and controllers
+     * 
+     * @method  initiateBundles
+     */
     initiateBundles() {
         let scope = this;
 

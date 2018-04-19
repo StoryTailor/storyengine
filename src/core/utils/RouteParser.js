@@ -7,7 +7,6 @@ const express = require("express");
 class RouteParser {
     /**
      * @method constructor
-     * @return {void}
      */
     constructor() {}
 
@@ -38,7 +37,7 @@ class RouteParser {
                     });
                 });
 
-                // TODO
+                // Assign routes to controller methods
                 for(let i in bundles) {
                     let controller = bundles[i].controller,
                         routes = bundles[i].config.routes;
