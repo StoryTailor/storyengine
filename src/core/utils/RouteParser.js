@@ -44,7 +44,8 @@ class RouteParser {
 
                     for(let r in routes) {
                         if(typeof controller[r] !== "undefined") {
-                            app.use(routes[r].url, (req, res) => {
+                            let method = routes[r].method.toLowerCase();
+                            app[method](routes[r].url, (req, res) => {
                                 controller[r](req, res);
                             });
                         }
