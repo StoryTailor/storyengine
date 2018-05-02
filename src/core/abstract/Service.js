@@ -1,23 +1,55 @@
+/**
+ * @module  AbstractService
+ */
 class AbstractService {
     constructor(mongo, schema, collectionName) {
         this.model = mongo.model(collectionName, schema);
     }
 
+    /**
+     * Get all objects from model
+     *
+     * @method  get
+     * @param  {Object} filters Filters
+     * @return {Promise}
+     */
     get(filters) {
         let scope = this;
-        filters = filers || {};
+        filters = filters || {};
 
         return scope.model.find(filters);
     }
 
+    /**
+     * Get an object by its objectid
+     *
+     * @method  getById
+     * @param  {String} id ObjectId
+     * @return {Promise}
+     */
     getById(id) {
         return this.model.findById(id);
     }
 
+    /**
+     * Insert a new object from json data
+     *
+     * @method  post
+     * @param  {Object} data Json data
+     * @return {Promise}
+     */
     post(data) {
         return this.model.create(data);
     }
 
+    /**
+     * Update an object by passing new data
+     *
+     * @method  
+     * @param  {String} id      ObjectId
+     * @param  {Object} data    Json data 
+     * @return {Promise}
+     */
     put(id, data) {
         let scope = this;
         return this.model.findById(id)
@@ -31,6 +63,13 @@ class AbstractService {
         })
     }
 
+    /**
+     * Delete a specified object by its id
+     *
+     * @method  delete
+     * @param  {String} id ObjectId
+     * @return {Promise}
+     */
     delete(id) {
         return this.getById(id)
         .exec()

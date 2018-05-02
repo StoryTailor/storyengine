@@ -1,3 +1,4 @@
 module.exports = {
-	routes: require("./routes.json")
+	routes: require("./routes.json"),
+	global: require("./global.json")
 };

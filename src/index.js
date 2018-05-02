@@ -2,6 +2,7 @@ const path = require("path");
 const config = require(path.join(__dirname, "../config"));
 const Express = require("./core/Express.js");
 const Mongo = require("./core/Mongo.js");
+
 /**
  * @module  App
  * Class which creates and starts the express app
@@ -14,10 +15,29 @@ class App {
      * @param {Object} bundles App bundles
      * @return {void}
      */
-    constructor(bundles){
+    constructor(){
+        let bundles = require("../src/bundles");
+
         this.express = new Express(config);
         this.mongoClient = new Mongo(config.mongo);
         this.bundles = bundles;
+    }
+
+    /**
+     * Browse all the bundles and create the matching
+     * services and controllers
+     * 
+     * @method  initiateBundles
+     */
+    initiateBundles() {
+        let scope = this;
+
+        for(let i in scope.bundles) {
+            let bundle = scope.bundles[i],
+                config = bundle.config;
+            bundle.service = new bundle.service(scope.mongoClient, bundle.model, config.global.collectionName);
+            bundle.controller = new bundle.controller(bundle.service);
+        }
     }
 
     /**
@@ -30,6 +50,7 @@ class App {
     startEngine() {
         let scope = this;
         let config = scope.express.config;
+        scope.initiateBundles();
 
         return new Promise((resolve, reject) => {
             try {

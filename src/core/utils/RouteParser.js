@@ -7,7 +7,6 @@ const express = require("express");
 class RouteParser {
     /**
      * @method constructor
-     * @return {void}
      */
     constructor() {}
 
@@ -38,11 +37,20 @@ class RouteParser {
                     });
                 });
 
-                // TODO
-                // configRoutes.forEach((route) => {
-                //     let action = route.action;
-                //     app.use(route.url, action);
-                // });
+                // Assign routes to controller methods
+                for(let i in bundles) {
+                    let controller = bundles[i].controller,
+                        routes = bundles[i].config.routes;
+
+                    for(let r in routes) {
+                        if(typeof controller[r] !== "undefined") {
+                            let method = routes[r].method.toLowerCase();
+                            app[method](routes[r].url, (req, res) => {
+                                controller[r](req, res);
+                            });
+                        }
+                    }
+                }
 
                 resolve(app);
             }
