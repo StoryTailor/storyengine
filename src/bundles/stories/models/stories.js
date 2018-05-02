@@ -1,4 +1,5 @@
 const Schema = require("mongoose").Schema;
+const Structure = require("./structures.js");
 
 /**
 * Schema Contacts
@@ -10,6 +11,27 @@ class Stories extends Schema {
             name : {
                 type : String,
                 required : true
+            },
+            // TODO
+            // Custom field Mongo
+            reference : {
+                type : String,
+                required : true
+            },
+            genres : {
+                type: [
+                    String
+                ],
+                required : true
+            },
+            author : {
+                type : String
+            },
+            thumb : {
+                type : String
+            },
+            structure : {
+                type : Structure
             }
         });
     }
