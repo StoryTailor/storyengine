@@ -3,6 +3,6 @@
     "options" : {
         "server" : {
             "reconnectTries": 60
-        }
+       	}
     }
 }
