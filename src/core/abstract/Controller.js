@@ -37,7 +37,7 @@ class AbstractController {
             });
         })
         .catch((error) => {
-            _checkError(error, res);
+            this._checkError(error, res);
         });
     }
 
@@ -58,7 +58,7 @@ class AbstractController {
             });
         })
         .catch((error) => {
-            _checkError(error, res);
+            this._checkError(error, res);
         });
     }
 
@@ -79,7 +79,7 @@ class AbstractController {
             });
         })
         .catch((error) => {
-            _checkError(error, res);
+            this._checkError(error, res);
         });
     }
 
@@ -101,7 +101,7 @@ class AbstractController {
             });
         })
         .catch((error) => {
-            _checkError(error, res);
+            this._checkError(error, res);
         });
     }
 
@@ -123,7 +123,7 @@ class AbstractController {
             })
         })
         .catch((error) => {
-            _checkError(error, res);
+            this._checkError(error, res);
         });
     }
 
