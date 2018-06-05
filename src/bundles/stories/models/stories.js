@@ -10,10 +10,9 @@ class Stories extends Schema {
         super({
             name : {
                 type : String,
-                required : true
+                required : true,
+                unique : true
             },
-            // TODO
-            // Custom field Mongo
             reference : {
                 type : String,
                 required : true
