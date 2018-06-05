@@ -1,0 +1,22 @@
+{
+    "get": {
+        "method": "GET",
+        "url": "/genres"
+    },
+    "getById": {
+        "method": "GET",
+        "url": "/genres/:id"
+    },
+    "post": {
+        "method": "POST",
+        "url": "/genres"
+    },
+    "put": {
+        "method": "PUT",
+        "url": "/genres/:id"
+    },
+    "delete": {
+        "method": "DELETE",
+        "url": "/genres/:id"
+    }
+}
