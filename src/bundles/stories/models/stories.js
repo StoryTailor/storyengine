@@ -17,12 +17,10 @@ class Stories extends Schema {
                 type : String,
                 required : true
             },
-            genres : {
-                type: [
-                    String
-                ],
-                required : true
-            },
+            genres : [{ 
+                type: Schema.Types.ObjectId, 
+                ref: 'genres' 
+            }],
             author : {
                 type : String
             },
