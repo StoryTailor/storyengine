@@ -35,7 +35,36 @@ class ReferenceMaker {
                 reject(error);
                 throw new Error(error);
             }
-        })
+        });
+    }
+
+    /**
+     * Check the match between base reference and 
+     * new reference, and the consistency of the
+     * attributes used to generate it.
+     * 
+     * @method  check
+     * @param   {String} baseRef Base reference
+     * @param   {Object} newStory New story
+     * @return {Promise}
+     */
+    check(baseRef, newStory) {
+        let errMsg = "References don't match. Update has been blocked";
+
+        return new Promise((resolve, reject) => {
+            if(baseRef !== newStory.reference) {
+                reject(errMsg);
+            }
+            this.proceed(newStory)
+            .then((data) => {
+                if(data.reference === baseRef) {
+                    resolve(newStory);
+                }
+                else {
+                    reject(errMsg);
+                }
+            })
+        });
     }
 }
 
