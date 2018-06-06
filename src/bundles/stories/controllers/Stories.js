@@ -8,6 +8,7 @@ const refMaker = require("../../../core/utils/ReferenceMaker.js");
 class StoriesController extends AbstractController {
     constructor(service) {
         super(service);
+        this.genresService = genresService;
     }
 
     /**
@@ -23,8 +24,14 @@ class StoriesController extends AbstractController {
 
         refMaker.proceed(req.body)
         .then((story) => {
-        	req.body = story;
+            req.body = story;
             super.post(req, res);
+        })
+        .catch((err) => {
+            res.json({
+                status : "error",
+                detail : err
+            });
         });
     }
 
@@ -40,13 +47,16 @@ class StoriesController extends AbstractController {
     put(req, res) {
         this.service.getById(req.params.id)
         .then((story) => {
-            if(story.reference !== req.body.reference) {
-            	res.json({
-            		status : "error",
-            		detail : "References don't match. Update has been blocked"
-            	});
-            }
+            return refMaker.check(story.reference, req.params.body);
+        })
+        .then((newStory) => {
             super.put(req, res);
+        })
+        .catch((err) => {
+            res.json({
+                status : "error",
+                detail : err
+            });
         });
     }
 }
