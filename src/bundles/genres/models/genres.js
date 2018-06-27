@@ -4,7 +4,7 @@ const Schema = require("mongoose").Schema;
 * Schema Contacts
 * @module App.Models.Contacts
 */
-class Stories extends Schema {
+class Genres extends Schema {
     constructor() {
         super({
             label : {
@@ -19,4 +19,4 @@ class Stories extends Schema {
     }
 }
 
-module.exports = new Stories();
+module.exports = new Genres();
