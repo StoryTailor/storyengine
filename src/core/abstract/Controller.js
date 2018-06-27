@@ -20,6 +20,17 @@ class AbstractController {
     }
 
     /**
+     * Initiate the controller with the
+     * dependency injector
+     * 
+     * @param  {Object} provider Provider
+     * @return {void}
+     */
+    init(provider) {
+        this.provider = provider;
+    }
+
+    /**
      * Get all the objects
      *
      * @method  get

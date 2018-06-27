@@ -7,6 +7,17 @@ class AbstractService {
     }
 
     /**
+     * Initiate the service with the
+     * dependency injector
+     * 
+     * @param  {Object} provider Provider
+     * @return {void}
+     */
+    init(provider) {
+        this.provider = provider;
+    }
+
+    /**
      * Get all objects from model
      *
      * @method  get
