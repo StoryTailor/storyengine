@@ -8,7 +8,20 @@ const refMaker = require("../../../core/utils/ReferenceMaker.js");
 class StoriesController extends AbstractController {
     constructor(service) {
         super(service);
-        this.genresService = genresService;
+    }
+
+    /**
+     * Initiate the controller with the
+     * dependency injector, and sets the
+     * genres service
+     *
+     * @method  init
+     * @param  {Object} provider Provider
+     * @return {void}
+     */
+    init(provider) {
+        super.init(provider);
+        this.genresService = provider.load("service.genres");
     }
 
     /**
