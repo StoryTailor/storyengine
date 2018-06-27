@@ -62,7 +62,7 @@ class StoriesController extends AbstractController {
         .then((story) => {
             return refMaker.check(story.reference, req.params.body);
         })
-        .then((newStory) => {
+        .then(() => {
             super.put(req, res);
         })
         .catch((err) => {
