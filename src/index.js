@@ -2,6 +2,7 @@ const path = require("path");
 const config = require(path.join(__dirname, "../config"));
 const Express = require("./core/Express.js");
 const Mongo = require("./core/Mongo.js");
+const InstanceLoader = require("./core/utils/InstanceLoader.js");
 
 /**
  * @module  App
@@ -21,6 +22,7 @@ class App {
         this.express = new Express(config);
         this.mongoClient = new Mongo(config.mongo);
         this.bundles = bundles;
+        this.provider = InstanceLoader;
     }
 
     /**
@@ -32,11 +34,24 @@ class App {
     initiateBundles() {
         let scope = this;
 
+        // Create the controllers and services, and register them in the provider
         for(let i in scope.bundles) {
             let bundle = scope.bundles[i],
-                config = bundle.config;
+                config = bundle.config,
+                controllerName = `service.${config.global.collectionName}`,
+                serviceName = `controller.${config.global.collectionName}`;
             bundle.service = new bundle.service(scope.mongoClient, bundle.model, config.global.collectionName);
+            this.provider.register(serviceName, bundle.service);
             bundle.controller = new bundle.controller(bundle.service);
+            this.provider.register(controllerName, bundle.controller);
+        }
+
+        // Affect the provider to the controllers and services
+        for(let i in scope.bundles) {
+            let bundle = scope.bundles[i];
+
+            bundle.service.init(this.provider);
+            bundle.controller.init(this.provider);
         }
     }
 
