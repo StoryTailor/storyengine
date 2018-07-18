@@ -38,8 +38,8 @@ class App {
         for(let i in scope.bundles) {
             let bundle = scope.bundles[i],
                 config = bundle.config,
-                controllerName = `service.${config.global.collectionName}`,
-                serviceName = `controller.${config.global.collectionName}`;
+                serviceName = `service.${config.global.collectionName}`,
+                controllerName = `controller.${config.global.collectionName}`;
             bundle.service = new bundle.service(scope.mongoClient, bundle.model, config.global.collectionName);
             this.provider.register(serviceName, bundle.service);
             bundle.controller = new bundle.controller(bundle.service);
