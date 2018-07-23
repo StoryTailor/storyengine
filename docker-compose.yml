@@ -1,7 +1,7 @@
 version: '2'
 services:
     mongo:
-        image: mongo:3.6
+        image: mongo:latest
         entrypoint: "mongod --profile=1 --slowms=1 --logpath=/var/log/mongodb/mongod.log"
         container_name: mongo
         ports:
@@ -25,4 +25,6 @@ services:
         ports:
             - 27000:27000
         links:
+            - mongo
+        depends_on:
             - mongo
