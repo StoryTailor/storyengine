@@ -4,7 +4,7 @@
   "description": "A Node.js based engine to create non-linear stories",
   "main": "index.js",
   "scripts": {
-    "engine": "node index.js"
+    "engine": "pm2 start process.yml"
   },
   "repository": {
     "type": "git",
@@ -34,5 +34,8 @@
     "merge": ">=1.2.1",
     "mongoose": "^5.0.12",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "@types/node": "^11.12.0"
   }
 }

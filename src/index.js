@@ -32,23 +32,21 @@ class App {
      * @method  initiateBundles
      */
     initiateBundles() {
-        let scope = this;
-
         // Create the controllers and services, and register them in the provider
-        for(let i in scope.bundles) {
-            let bundle = scope.bundles[i],
+        for(let i in this.bundles) {
+            let bundle = this.bundles[i],
                 config = bundle.config,
                 serviceName = `service.${config.global.collectionName}`,
                 controllerName = `controller.${config.global.collectionName}`;
-            bundle.service = new bundle.service(scope.mongoClient, bundle.model, config.global.collectionName);
+            bundle.service = new bundle.service(this.mongoClient, bundle.model, config.global.collectionName);
             this.provider.register(serviceName, bundle.service);
             bundle.controller = new bundle.controller(bundle.service);
             this.provider.register(controllerName, bundle.controller);
         }
 
         // Affect the provider to the controllers and services
-        for(let i in scope.bundles) {
-            let bundle = scope.bundles[i];
+        for(let i in this.bundles) {
+            let bundle = this.bundles[i];
 
             bundle.service.init(this.provider);
             bundle.controller.init(this.provider);
@@ -64,7 +62,6 @@ class App {
      */
     startEngine() {
         let scope = this;
-        let config = scope.express.config;
         scope.initiateBundles();
 
         return new Promise((resolve, reject) => {
